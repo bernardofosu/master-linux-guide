@@ -59,3 +59,119 @@ docker run -dit \
 | `--env TZ=Asia/Kolkata` | Sets the **timezone** (modify based on your location). |
 | `--env LANG=en_US.UTF-8` | Sets the **language** settings inside the container. |
 | `ubuntu:latest /bin/bash` | Uses the latest **Ubuntu** image and runs Bash shell. |
+
+
+
+## ✅ Basic Command to Exec into a Running Container and run your linux commands
+```sh
+docker exec -it <container_name_or_id> /bin/bash
+```
+- -i = interactive
+- -t = allocate a pseudo-TTY (for terminal-like behavior)
+- /bin/bash = the shell you want to run (can also use /bin/sh)
+
+### 🔍 Example
+```sh
+docker ps
+```
+(Lists running containers — get the container name or ID)
+```sh
+docker exec -it my_container_name /bin/bash
+```
+
+### 🛠️ If bash Doesn’t Work (Alpine or BusyBox images)
+Some containers don’t have bash, so use:
+```sh
+docker exec -it my_container_name /bin/sh
+```
+
+### 🐳 To Get a Shell as Root User
+```sh
+docker exec -u 0 -it my_container_name /bin/bash
+```
+Or:
+```sh
+docker exec -u root -it my_container_name /bin/sh
+```
+
+# ✅ How to Install WSL2 on Windows
+
+---
+
+## Step 1: Enable Required Windows Features
+
+1. Click **Start** → search:  
+   🔍 `Turn Windows features on or off`
+2. Enable the following by checking them:
+   - ✅ **Windows Subsystem for Linux**
+   - ✅ **Virtual Machine Platform**
+3. Click **OK** → Let it apply → **Restart your PC** when prompted.
+
+---
+
+## Step 2: Install WSL
+
+1. Open **PowerShell** or **Command Prompt** as **Administrator**
+2. Run:
+   ```powershell
+   wsl --install
+   ```
+   > This installs the WSL2 components and sets WSL2 as the default version.
+
+---
+
+## Step 3: Open Microsoft Store
+
+1. Search for a Linux distribution like:
+   - ✅ **Ubuntu 22.04 LTS** (recommended)
+2. Click **Install**
+
+---
+
+## Step 4: Reboot Your Computer
+
+- Restart your system to finalize everything.
+
+---
+
+## Step 5: Launch the Linux Distro for First-Time Setup
+
+1. Click **Start** → Open **Ubuntu** (or whichever distro you installed)
+2. A terminal window will open and say:  
+   _“Installing, this may take a few minutes…”_
+3. When prompted:
+   - **Enter a username** for your default Linux user
+   - **Create a password**
+
+> ✅ This is your Linux account — you can add other users later using standard Linux commands.
+
+---
+
+## 🔍 Step 6: Verify Installation
+
+Open **PowerShell** (regular user is fine):
+
+### ✅ Check WSL installation status:
+```powershell
+wsl --status
+```
+
+### ✅ Check installed Linux distros:
+```powershell
+wsl --list --verbose
+```
+Or:
+```powershell
+wsl -l -v
+```
+
+Expected output:
+```sh
+  NAME      STATE           VERSION
+* Ubuntu    Running         2
+```
+
+---
+
+You're now ready to use WSL2 with a full Linux terminal environment! 🐧💻
+

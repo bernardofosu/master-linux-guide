@@ -6,3 +6,6 @@
 4. **`netstat -tulnp`** – Displays open network connections.
 5. **`curl https://example.com`** – Fetches a webpage's content.
 6. **`wget https://example.com/file.zip`** – Downloads a file from the internet.
+
+
+
