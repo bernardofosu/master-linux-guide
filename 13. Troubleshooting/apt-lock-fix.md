@@ -54,7 +54,34 @@ sudo apt update
 sudo apt upgrade -y
 ```
 
----
+Fix ssh login error using WSL
+```sh
+workstation@Nana-Kwasi-Fosu:~$ chmod 400 /mnt/c/Users/ofosu/Downloads/runners.pem
+
+workstation@Nana-Kwasi-Fosu:~$ ssh -i /mnt/c/Users/ofosu/Downloads/runners.pem ubuntu@54.234.159.238
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions 0555 for '/mnt/c/Users/ofosu/Downloads/runners.pem' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key "/mnt/c/Users/ofosu/Downloads/runners.pem": bad permissions
+ubuntu@54.234.159.238: Permission denied (publickey).
+
+workstation@Nana-Kwasi-Fosu:~$ ls -la /mnt/c/Users/ofosu/Downloads/runners.pem
+```
+
+Solution
+```sh
+workstation@Nana-Kwasi-Fosu:~$ cp /mnt/c/Users/ofosu/Downloads/runners.pem ~/.ssh/
+
+workstation@Nana-Kwasi-Fosu:~$ chmod 600 ~/.ssh/runners.pem
+
+workstation@Nana-Kwasi-Fosu:~$ ssh -i ~/.ssh/runners.pem ubuntu@54.234.159.238
+
+Welcome to Ubuntu 24.04.3 LTS (GNU/Linux 6.14.0-1012-aws x86_64)
+```
+
 
 ⚠️ **Important Tip:**  
 🚫 Never delete lock files while another package process is running — always check with `ps aux | grep apt` first.  
